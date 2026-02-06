@@ -1,0 +1,27 @@
+/* General styling */
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Reusable classes */
+.section-title {
+  margin-bottom: 20px;
+}
+
+.card {
+  border-radius: 12px;
+}
+
+/* Override example */
+.btn {
+  border-radius: 6px;
+}
+.btn-primary {
+  border-radius: 30px;
+}
+
+/* Image styling */
+.hero-image {
+  max-height: 350px;
+  object-fit: cover;
+}

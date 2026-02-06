@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Caudan Parking System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">Caudan Parking</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/availability.html">Availability</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/pricing.html">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="container py-5">
+    <h1 class="fw-bold">Welcome to Caudan Parking System</h1>
+    <p class="text-muted">
+      This website helps you check parking availability, pricing,
+      and estimate parking fees easily.
+    </p>
+
+    <a href="pages/availability.html" class="btn btn-primary">
+      Check Parking Availability
+    </a>
+    <hr class="my-5">
+
+<h2 class="fw-bold mb-3">Parking Fee Calculator</h2>
+<p class="text-muted">Estimate your parking cost before arriving.</p>
+
+<div class="row g-3 align-items-end">
+  <div class="col-md-4">
+    <label class="form-label">Number of Hours</label>
+    <input type="number" id="hours" class="form-control" placeholder="e.g. 3">
+  </div>
+
+  <div class="col-md-4">
+    <label class="form-label">Rate Type</label>
+    <select id="rate" class="form-select">
+      <option value="50">Standard (Rs 50/hour)</option>
+      <option value="40">Early Bird (Rs 40/hour)</option>
+      <option value="60">Peak Hours (Rs 60/hour)</option>
+    </select>
+  </div>
+
+  <div class="col-md-4">
+    <button class="btn btn-primary w-100" onclick="calculateFee()">
+      Calculate
+    </button>
+  </div>
+</div>
+
+<div id="result" class="alert alert-info mt-3 d-none"></div>
+<img src="images/parking1.jpg"
+     alt="Car parking area at Caudan"
+     class="img-fluid rounded mt-4 hero-image">
+     
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function calculateFee() {
+    const hours = document.getElementById("hours").value;
+    const rate = document.getElementById("rate").value;
+    const resultBox = document.getElementById("result");
+
+    if (hours <= 0 || hours === "") {
+      resultBox.classList.remove("d-none");
+      resultBox.textContent = "Please enter a valid number of hours.";
+      return;
+    }
+
+    const total = hours * rate;
+    resultBox.classList.remove("d-none");
+    resultBox.textContent = "Estimated Parking Fee: Rs " + total;
+  }
+</script>
+</body>
+</html>
