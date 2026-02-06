@@ -10,6 +10,7 @@
 </head>
 <body>
 
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand fw-bold" href="../index.html">Caudan Parking</a>
@@ -48,11 +49,33 @@
   </div>
 </nav>
 
+
 <main class="container py-5">
 
   <h1 class="fw-bold">Reserve a Parking Slot</h1>
   <p class="text-muted mb-4">
+    Fill in the form below to reserve a parking slot.
   </p>
+
+<h4 class="fw-bold mt-4">Reservation Guidelines</h4>
+
+<ul>
+  <li>Before reserving, make sure:
+    <ul>
+      <li>Your vehicle number is correct</li>
+      <li>You select an available parking slot</li>
+      <li>You arrive within your selected time</li>
+    </ul>
+  </li>
+
+  <li>After reservation:
+    <ul>
+      <li>Follow on-site parking signs</li>
+      <li>Park only in your reserved slot</li>
+      <li>Contact staff if assistance is needed</li>
+    </ul>
+  </li>
+</ul>
 
  
   <div class="row g-4 mb-4">
@@ -69,7 +92,7 @@
       <div class="card h-100">
         <div class="card-body">
           <h5 class="fw-bold">Step 2</h5>
-          <p class="mb-0">Choose a parking slot and arrival time.</p>
+          <p class="mb-0">Choose a preferred parking slot and arrival time.</p>
         </div>
       </div>
     </div>
@@ -78,7 +101,7 @@
       <div class="card h-100">
         <div class="card-body">
           <h5 class="fw-bold">Step 3</h5>
-          <p class="mb-0">Submit to receive confirmation.</p>
+          <p class="mb-0">Submit the form to confirm your reservation.</p>
         </div>
       </div>
     </div>
@@ -114,6 +137,16 @@
         <input type="time" id="time" class="form-control">
       </div>
 
+   
+      <div class="col-12">
+        <div class="form-check mt-2">
+          <input class="form-check-input" type="checkbox" id="agree">
+          <label class="form-check-label" for="agree">
+            I agree to the parking terms and conditions
+          </label>
+        </div>
+      </div>
+
       <div class="col-12">
         <button class="btn btn-primary w-100" type="button" onclick="reserveParking()">
           Submit Reservation
@@ -124,42 +157,60 @@
   </div>
 
 
-  <div id="reservationResult" class="alert alert-success d-none">
-     Reservation successful! Your parking slot has been reserved.
+  <div id="reservationError" class="alert alert-danger d-none">
+    Please fill in all reservation details and accept the terms.
   </div>
+
+
+  <div id="reservationResult" class="alert alert-success d-none"></div>
+
 
   <h3 class="mt-5 fw-bold">Reservation Reference Images</h3>
   <p class="text-muted">Examples related to booking and reserved parking slots.</p>
 
   <div class="row mt-3">
     <div class="col-md-4 mb-3">
-      <img src="../images/reservation-1.jpg" class="img-fluid rounded" alt="Reservation image 1">
+      <img src="../images/reservation-1.jpg" class="img-fluid rounded" alt="Reservation 1">
     </div>
     <div class="col-md-4 mb-3">
-      <img src="../images/reservation-2.jpg" class="img-fluid rounded" alt="Reservation image 2">
+      <img src="../images/reservation-2.jpg" class="img-fluid rounded" alt="Reservation 2">
     </div>
     <div class="col-md-4 mb-3">
-      <img src="../images/reservation-3.jpg" class="img-fluid rounded" alt="Reservation image 3">
+      <img src="../images/reservation-3.jpg" class="img-fluid rounded" alt="Reservation 3">
     </div>
   </div>
 
 </main>
 
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
   function reserveParking() {
-    const name = document.getElementById("name").value;
-    const vehicle = document.getElementById("vehicle").value;
+    const name = document.getElementById("name").value.trim();
+    const vehicle = document.getElementById("vehicle").value.trim();
     const slot = document.getElementById("slot").value;
     const time = document.getElementById("time").value;
+    const agree = document.getElementById("agree").checked;
 
-    if (name === "" || vehicle === "" || slot === "" || time === "") {
-      alert("Please fill in all reservation details.");
+    const errorBox = document.getElementById("reservationError");
+    const successBox = document.getElementById("reservationResult");
+
+    errorBox.classList.add("d-none");
+    successBox.classList.add("d-none");
+
+    if (name === "" || vehicle === "" || slot === "" || time === "" || !agree) {
+      errorBox.classList.remove("d-none");
       return;
     }
 
-    document.getElementById("reservationResult").classList.remove("d-none");
+    successBox.classList.remove("d-none");
+    successBox.innerHTML =
+      "<strong>Reservation Successful!</strong><br>" +
+      "Name: " + name + "<br>" +
+      "Vehicle: " + vehicle + "<br>" +
+      "Slot: " + slot + "<br>" +
+      "Arrival Time: " + time;
   }
 </script>
 
